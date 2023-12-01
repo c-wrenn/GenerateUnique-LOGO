@@ -2,7 +2,7 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const { Circle, Triangle, Square } = require("./lib/shapes")
 const { writeFile } = require("fs/promises");
-const combine = require("./lib/utils/svg-compile");
+const CombineSVG = require("./lib/utils/svg-compile");
 //Use inheritance to reuse code
 let svgLogo;
 function generateLogo() {
@@ -12,7 +12,7 @@ function generateLogo() {
     //Text for logo
 type: 'input',
 message: "Enter up to three characters for your LOGO text:",
-name: 'logotext'
+name: 'text'
 //add validationt hat the text entered is 
 //no more than 3 characters
 },
@@ -47,17 +47,17 @@ name: 'shapecolor',
             svgLogo = new Circle();
             break;
         case'Square':
-        svgLogo = new Square();
+            svgLogo = new Square();
             break;
         default:
             break;
     }
     svgLogo.setColor(res.shapecolor)
 
-    const combine = new CombineSVG();
-    combine.setText(res.logotext, res.textcolor);
-    combine.setShape(svgLogo);
-    return writeFile("./generated/logo.svg", svg.render());
+    const combineSVG = new CombineSVG();
+    combineSVG.setText(res.text, res.textcolor);
+    combineSVG.setShape(svgLogo);
+    return writeFile("./generated/logo.svg", combineSVG.render());
 }).then(() => {
     console.log("Your SVG logo has been successfully generated and named logo.svg in the examples folder");
 });

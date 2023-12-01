@@ -1,4 +1,4 @@
-export { coloursArray };
+
 
 const coloursArray = [
     "aliceblue",
@@ -148,3 +148,4 @@ const coloursArray = [
     "yellow",
     "yellowgreen"
 ];
+export { coloursArray };
